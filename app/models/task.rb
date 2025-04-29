@@ -10,7 +10,7 @@ class Task < ApplicationRecord
 
   scope :not_subtasks,  -> { where(task_id: nil) }
   scope :expired,       -> { where(expires_at: ..Time.current) }
-  scope :active,        -> { where.not(expires_at: ..Time.current) }
+  scope :active,        -> { not_expired.where.not(expires_at: ..Time.current) }
   scope :expiring_soon, ->(window = 12.hour) {
     where(expires_at: Time.current..window.from_now)
   }
@@ -19,7 +19,6 @@ class Task < ApplicationRecord
   validates :expires_at, presence: true
 
   after_update_commit :mark_expired_subtasks, if: -> { saved_change_to_status? && expired? }
-  broadcasts_refreshes
 
   def expiration_due?(threshold = 12.hours.from_now)
     !expired? && expires_at <= threshold

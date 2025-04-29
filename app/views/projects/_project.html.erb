@@ -24,7 +24,7 @@
       </div>
     <% end %>
     <div class="card-footer d-flex justify-content-between align-items-center">
-      <div><%= project.tasks.active.count %> pending tasks</div>
+      <div><%= project.active_tasks.size %> pending tasks</div>
       <div class="btn-group">
         <%= link_to 'Visit', project_path(project), class: 'btn btn-info btn-sm', data: { turbo_frame: 'selected_project' } %>
         <%= button_to "Delete", project_path(project), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-danger btn-sm" %>

@@ -2,9 +2,9 @@ puts "⏳ Dropping database..."
 Task.destroy_all
 Project.destroy_all
 
-puts "🌱 Creating 100 projects with between 20 to 30 tasks each..."
+puts "🌱 Creating 200 projects with between 30 to 40 tasks each..."
 
-100.times do |i|
+200.times do |i|
   project = Project.create!(
     title:       Faker::App.name,
     description: Faker::Lorem.paragraph(sentence_count: 2),
@@ -12,7 +12,7 @@ puts "🌱 Creating 100 projects with between 20 to 30 tasks each..."
   )
 
   project_tasks = []
-  rand(20..30).times do
+  rand(30..40).times do
     project_tasks << project.tasks.create!(
       content:   Faker::Lorem.sentence(word_count: 5),
       status:  Task.statuses.keys.sample,
@@ -20,12 +20,12 @@ puts "🌱 Creating 100 projects with between 20 to 30 tasks each..."
     )
   end
 
+  num_parents = (project_tasks.size * 0.4).floor
+  parent_tasks = project_tasks.sample(num_parents)
   project_tasks.each do |task|
-    if project_tasks.size > 1 && rand < 0.3
-      parent = project_tasks.sample
-      parent = project_tasks.sample while parent == task
-      task.update!(task: parent)
-    end
+    next if parent_tasks.include?(task)
+
+    task.update!(task: parent_tasks.sample)
   end
 
   print "." if (i % 10).zero?

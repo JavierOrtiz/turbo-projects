@@ -1,3 +1,10 @@
-<%= turbo_stream.replace @task do %>
-  <%= render @task %>
+<% if @task.expired? %>
+  <% @task.subtasks.each do |subtask| %>
+    <%= turbo_stream.remove subtask %>
+  <% end %>
+  <%= turbo_stream.remove @task %>
+<% else %>
+  <%= turbo_stream.replace @task do %>
+    <%= render @task %>
+  <% end %>
 <% end %>
