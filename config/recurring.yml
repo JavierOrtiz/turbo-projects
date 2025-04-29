@@ -1,10 +1,10 @@
-# production:
-#   periodic_cleanup:
-#     class: CleanSoftDeletedRecordsJob
-#     queue: background
-#     args: [ 1000, { batch_size: 500 } ]
-#     schedule: every hour
-#   periodic_command:
-#     command: "SoftDeletedRecord.due.delete_all"
-#     priority: 2
-#     schedule: at 5am every day
+development:
+  a_check_task_expirations:
+    class: Tasks::CheckExpirationsJob
+    queue: recurring
+    schedule: every 12 hours
+production:
+  a_check_task_expirations:
+    class: Tasks::CheckExpirationsJob
+    queue: expirations
+    schedule: at 1am every day

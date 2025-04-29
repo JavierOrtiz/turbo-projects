@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.includes(:tasks).all
   end
 
   # GET /projects/1 or /projects/1.json
@@ -58,7 +58,7 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params.expect(:id))
+      @project = Project.includes(tasks: :subtasks).find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

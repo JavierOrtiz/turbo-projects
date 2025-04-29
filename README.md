@@ -1,24 +1,7 @@
-# README
+# Welcome to TurboProjects! 🚀
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Just ensure you have Ruby installed.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Execute `rails db:prepare`
+2. Execute `bin/rails mission_control:jobs:authentication:configure` to have credentials to jobs dashboard
+3. You are ready, just execute `./bin/dev`

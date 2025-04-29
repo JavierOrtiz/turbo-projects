@@ -1,31 +1,36 @@
-<tr id="<%= dom_id task %>">
-  <td style="padding-left: <%= task.parent.present? ? 20 : 0 %>px;">
-    <%= form_with(model: [task.project, task]) do %>
-      <%= turbo_frame_tag dom_id(task, "content_frame") do %>
-        <%= link_to [:edit, task.project, task] do %>
-          <% if task.parent.present? %>
-            <i class="fa-solid fa-folder-tree text-opacity-25"></i>
+<% if task.expired? %>
+  <%= turbo_stream.remove task %>
+  <%= turbo_stream.remove task.subtasks %>
+<% else %>
+  <tr id="<%= dom_id task %>">
+    <td style="padding-left: <%= task.parent.present? ? 20 : 0 %>px;">
+      <%= form_with(model: [task.project, task]) do %>
+        <%= turbo_frame_tag dom_id(task, "content_frame") do %>
+          <%= link_to [:edit, task.project, task] do %>
+            <% if task.parent.present? %>
+              <i class="fa-solid fa-folder-tree text-opacity-25"></i>
+            <% end %>
+            <%= task.content %>
           <% end %>
-          <%= task.content %>
         <% end %>
       <% end %>
-    <% end %>
-  </td>
-  <td>
-    <%= form_with(model: [task.project, task]) do %>
-      <%= turbo_frame_tag dom_id(task, "status_frame") do %>
-        <%= link_to [:edit, task.project, task] do %>
-          <%= status_badge(task) %>
+    </td>
+    <td>
+      <%= form_with(model: [task.project, task]) do %>
+        <%= turbo_frame_tag dom_id(task, "status_frame") do %>
+          <%= link_to [:edit, task.project, task] do %>
+            <%= status_badge(task) %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </td>
-  <td><%= l(task.created_at, format: :short) %></td>
-  <td>
-    <%= button_to "Delete", project_task_path(task.project, task), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-danger btn-sm" %>
-  </td>
-</tr>
+    </td>
+    <td><%= l(task.created_at, format: :short) %></td>
+    <td>
+      <%= button_to "Delete", project_task_path(task.project, task), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, class: "btn btn-danger btn-sm" %>
+    </td>
+  </tr>
 
-<% task.subtasks.each do |subtask| %>
-  <%= render subtask %>
+  <% task.subtasks.each do |subtask| %>
+    <%= render subtask %>
+  <% end %>
 <% end %>

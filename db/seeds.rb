@@ -1,10 +1,8 @@
-require 'faker'
-
-puts "⏳ Borrando datos existentes..."
+puts "⏳ Dropping database..."
 Task.destroy_all
 Project.destroy_all
 
-puts "🌱 Creando 100 proyectos con entre 20 y 30 tareas cada uno..."
+puts "🌱 Creating 100 projects with between 20 to 30 tasks each..."
 
 100.times do |i|
   project = Project.create!(
@@ -17,7 +15,8 @@ puts "🌱 Creando 100 proyectos con entre 20 y 30 tareas cada uno..."
   rand(20..30).times do
     project_tasks << project.tasks.create!(
       content:   Faker::Lorem.sentence(word_count: 5),
-      status:  Task.statuses.keys.sample
+      status:  Task.statuses.keys.sample,
+      expires_at: Faker::Time.between(from: Time.current, to: 2.days.from_now)
     )
   end
 
@@ -32,4 +31,4 @@ puts "🌱 Creando 100 proyectos con entre 20 y 30 tareas cada uno..."
   print "." if (i % 10).zero?
 end
 
-puts "\n✅ Seeds cargados correctamente."
+puts "\n✅ Seed completed!"

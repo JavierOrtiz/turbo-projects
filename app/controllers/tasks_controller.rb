@@ -44,7 +44,7 @@ class TasksController < ApplicationController
 
   private
     def set_task
-      @task = Task.find(params.expect(:id))
+      @task = Task.includes(:subtasks).find(params.expect(:id))
     end
 
     def task_params
