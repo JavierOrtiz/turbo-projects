@@ -4,5 +4,14 @@
 
 import { application } from "./application"
 
+import EditFieldController from "./edit_field_controller"
+application.register("edit-field", EditFieldController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
+import StatusSelectController from "./status_select_controller"
+application.register("status-select", StatusSelectController)

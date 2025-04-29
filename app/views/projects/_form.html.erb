@@ -1,0 +1,46 @@
+<%= form_with(model: project, local: false) do |f| %>
+  <% if project.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% project.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="mb-3">
+    <%= f.label :title %>
+    <%= turbo_frame_tag dom_id(@project, "title_frame") do %>
+      <%= f.text_field :title,
+          class: "form-control",
+          data: {
+            controller: "edit-field",
+            action: "blur->edit-field#submit keydown.enter->edit-field#submit"
+          } %>
+    <% end %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :description %>
+    <%= turbo_frame_tag dom_id(@project, "description_frame") do %>
+      <%= f.text_area :description, class: "form-control",
+                      data: {
+                        controller: "edit-field",
+                        action: "blur->edit-field#submit keydown.enter->edit-field#submit"
+                      } %>
+    <% end %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :status %>
+    <%= turbo_frame_tag dom_id(@project, "status_frame") do %>
+      <%= f.select :status,
+          Project.statuses.keys.map { |s| [s.humanize, s] },
+          {},
+          class: "form-select",
+          data: { controller: "status-select", action: "change->status-select#submitOnChange" } %>
+    <% end %>
+  </div>
+
+  <div class="modal-footer">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

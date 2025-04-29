@@ -1,0 +1,5 @@
+<%= turbo_stream.update Project.new, "" %>
+
+<%= turbo_stream.append "projects" do %>
+  <%= render @project %>
+<% end %>

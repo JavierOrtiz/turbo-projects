@@ -1,0 +1,19 @@
+<% content_for :title, "Editing project" %>
+
+<h1>Editing project</h1>
+
+<%= turbo_frame_tag @project do %>
+  <div class="card">
+    <div class="card-body">
+      <h1>Edit project</h1>
+      <%= render "form", project: @project %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
+<div>
+  <%= link_to "Show this project", @project %> |
+  <%= link_to "Back to projects", projects_path %>
+</div>

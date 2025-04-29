@@ -23,6 +23,9 @@
   </head>
 
   <body>
+  <div class="container mt-3">
     <%= yield %>
+    <%= turbo_frame_tag "modal", target: "_top" %>
+  </div>
   </body>
 </html>

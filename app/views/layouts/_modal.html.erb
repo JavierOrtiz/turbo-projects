@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal fade" tabindex="-1" data-controller="modal">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class= "modal-title fs-3">
+            <%= title %>
+          </div>
+          <button type="button" class="btn-close text-danger fs-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

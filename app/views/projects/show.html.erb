@@ -1,0 +1,12 @@
+<%= turbo_frame_tag 'selected_project' do %>
+  <%= render 'layouts/modal', title: @project.title, fade_in: true do %>
+    <div class="col">
+      <div>
+        <%= link_to "Edit this project", edit_project_path(@project) %> |
+        <%= link_to "Back to projects", projects_path %>
+
+        <%= button_to "Destroy this project", @project, method: :delete %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

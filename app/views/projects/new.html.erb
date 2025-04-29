@@ -1,0 +1,16 @@
+<% content_for :title, "New project" %>
+
+<%= turbo_frame_tag @project do %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h1>New project</h1>
+      <%= render "new_form", project: @project %>
+    </div>
+  </div>
+<% end %>
+
+<br>
+
+<div>
+  <%= link_to "Back to projects", projects_path %>
+</div>
