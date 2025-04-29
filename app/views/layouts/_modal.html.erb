@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do %>
-  <div class="modal fade" tabindex="-1" data-controller="modal">
+  <div class="modal fade" tabindex="-1" data-controller="modal"  data-backdrop="false" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,7 +8,7 @@
           </div>
           <button type="button" class="btn-close text-danger fs-3" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body p-3">
           <%= yield %>
         </div>
       </div>

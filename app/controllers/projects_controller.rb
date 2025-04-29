@@ -52,7 +52,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to projects_path, status: :see_other, notice: "Project was successfully destroyed." }
-      format.turbo_stream { flash.now[:notice] = "Project was successfully destroyed." }
     end
   end
 

@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./vendors/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/js/all"

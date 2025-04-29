@@ -1,4 +1,7 @@
 class Project < ApplicationRecord
+  has_many :tasks, dependent: :destroy,
+           inverse_of: :project
+
   enum :status, [:active, :archived]
 
   validates :title, presence: true

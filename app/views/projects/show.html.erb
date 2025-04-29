@@ -1,12 +1,17 @@
 <%= turbo_frame_tag 'selected_project' do %>
-  <%= render 'layouts/modal', title: @project.title, fade_in: true do %>
-    <div class="col">
-      <div>
-        <%= link_to "Edit this project", edit_project_path(@project) %> |
-        <%= link_to "Back to projects", projects_path %>
-
-        <%= button_to "Destroy this project", @project, method: :delete %>
-      </div>
-    </div>
+  <%= render 'layouts/modal', title: @project.title do %>
+    <table class="table table-striped table-hover">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">Content</th>
+        <th scope="col">Status</th>
+        <th scope="col">Created at</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        <%= render @project.tasks.not_subtasks.active %>
+      </tbody>
+    </table>
   <% end %>
 <% end %>
